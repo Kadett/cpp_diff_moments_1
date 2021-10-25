@@ -2,7 +2,10 @@
 #include "Person.h"
 
 std::ostream &operator<<(std::ostream &out, const Person &person) {
-    out << person.surname << " " << person.name << " " << (person.patronymic.empty() ? "???" : person.patronymic);
+    out << person.surname << ' ' << person.name << ' ';
+    if (!person.patronymic.empty()) {
+        out << ' ' << person.patronymic;
+    }
     return out;
 }
 
