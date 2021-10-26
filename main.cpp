@@ -1,14 +1,42 @@
 #include <iostream>
-#include "src/Person.h"
-#include "src/PhoneNumber.h"
+#include "src/PhoneBook.h"
 using namespace std;
 
 int main(){
-    PhoneNumber p1(7,495,"4564489");
-    PhoneNumber p2(7,495,"4564489",15);
+    ifstream file("../file/PhoneBook.txt");
 
-    cout << p1 << endl;
-    cout << p2 << endl;
+    PhoneBook book(file);
+    cout << book;
+
+    cout << "------SortByPhone-------" << endl;
+    book.SortByPhone();
+    cout << book;
+
+    cout << "------SortByName--------" << endl;
+    book.SortByName();
+    cout << book;
+
+    cout << "-----GetPhoneNumber-----" << endl;
+    // лямбда функция, которая принимает фамилию и выводит номер телефона этого    	человека, либо строку с ошибкой
+    auto print_phone_number = [&book](const string& surname) {
+        cout << surname << "\t";
+        auto answer = book.GetPhoneNumber(surname);
+        if (get<0>(answer).empty())
+            cout << get<1>(answer);
+        else
+            cout << get<0>(answer);
+        cout << endl;
+    };
+
+    // вызовы лямбды
+    print_phone_number("Ivanov");
+    print_phone_number("Petrov");
+
+    cout << "----ChangePhoneNumber----" << endl;
+    book.ChangePhoneNumber(Person{ "Kotov", "Vasilii", "Eliseevich" },PhoneNumber{7, 123, "15344458", nullopt});
+    book.ChangePhoneNumber(Person{ "Mironova", "Margarita", "Vladimirovna" }, PhoneNumber{ 16, 465, "9155448", 13 });
+    cout << book;
+
 
     return 0;
 }

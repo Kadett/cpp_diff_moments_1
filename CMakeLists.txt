@@ -3,4 +3,4 @@ project(cpp_diff_moments_1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(cpp_diff_moments_1 main.cpp src/Person.cpp src/Person.h src/PhoneNumber.cpp src/PhoneNumber.h)
+add_executable(cpp_diff_moments_1 main.cpp src/Person.cpp src/Person.h src/PhoneNumber.cpp src/PhoneNumber.h src/PhoneBook.cpp src/PhoneBook.h)

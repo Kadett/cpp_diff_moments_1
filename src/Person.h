@@ -1,14 +1,17 @@
 #pragma once
 
 #include <iostream>
+#include <tuple>
+#include <optional>
 
 class Person {
-    std::string surname{}, name{}, patronymic{};
 public:
+    std::string surname{}, name{};
+    std::optional<std::string> patronymic{};
 
-    Person(std::string surname, std::string name);
+    Person(std::string surname, std::string name, std::optional<std::string> patronymic = std::nullopt);
 
-    Person(std::string surname, std::string name, std::string patronymic);
+    std::string getSurname();
 
     friend std::ostream &operator<<(std::ostream &out, const Person &person);
 
